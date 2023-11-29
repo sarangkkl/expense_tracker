@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+{% if messages %}
+<div class="container mx-auto w-m">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+<div class="container mx-auto">
+    <h1 class="text-center">Register</h1>
+    <form method="POST" action="/register">
+        {% csrf_token %}
+        <div class="form-group my-2">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username"
+                placeholder="Enter username">
+        </div>
+        <div class="form-group my-2">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email"
+                placeholder="Enter email">
+        </div>
+        <div class="form-group my-2">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password"
+                placeholder="Enter password">
+        </div>
+        <div class="form-group my-2">
+            <label for="password2">Confirm Password</label>
+            <input type="password" class="form-control" id="password2" name="password2"
+                placeholder="Enter password again">
+        </div>
+        <div class="d-grid gap-2 my-2">
+            <button class="btn btn-primary" type="submit">Register</button>
+        </div>
+
+    </form>
+    
+</div>
+
+{% endblock body %}

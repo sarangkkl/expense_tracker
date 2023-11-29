@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h4 class="text-center font-bold">Welcome : {{request.user.username}}</h4>
+
+{% if messages %}
+<div class="container mx-auto w-m">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+<div class="container mx-auto">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+        Create Category
+    </button>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Create
+                    Category</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/add_category">
+                    {% csrf_token %}
+                    {{category_form}}
+                    <div class="d-grid gap-2 my-2">
+                        <button class="btn btn-primary" type="submit">Create
+                            Category</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mx-auto">
+    <form action="add_category" method="POST">
+        {% csrf_token %}
+        {{ form}}
+        <div class="d-grid gap-2 my-2">
+            <button class="btn btn-primary" type="submit">Record Expense</button>
+        </div>
+    </form>
+    <div class="my-1">
+        <select class="form-select" aria-label="Default select example">
+            <option selected>Filter By Category</option>
+            {% for category in categories %}
+            <option value="{{category.id}}">{{category.name}}</option>
+            {% endfor %}
+        </select>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab"
+                    data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+                    type="button" role="tab" aria-controls="home-tab-pane"
+                    aria-selected="true">All</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                    data-bs-target="#profile-tab-pane" type="button" role="tab"
+                    aria-controls="profile-tab-pane" aria-selected="false">INCOME</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                    data-bs-target="#contact-tab-pane" type="button" role="tab"
+                    aria-controls="contact-tab-pane" aria-selected="false">EXPENSE</button>
+            </li>
+
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home-tab-pane"
+                role="tabpanel" aria-labelledby="home-tab" tabindex="0">    
+                {% for expense in expenses %}
+                <div
+                    class="card {% if expense.expense_type == 'Expense' %}expense{% else %}income{% endif %}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ expense.category }}</h5>
+                        <p class="card-text">{{ expense.notes }}</p>
+                        <p class="card-text">
+                            Amount: ₹ {{ expense.amount }} | Date: {{expense.date}}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
+                aria-labelledby="profile-tab" tabindex="0">...</div>
+            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
+                aria-labelledby="contact-tab" tabindex="0">...</div>
+        </div>
+
+    </div>
+</div>
+{% endblock body %}
