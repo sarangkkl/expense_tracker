@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth.decorators import login_required
 from .models import  Category,Expense
+# import sum
+from django.db.models import Sum
 
 
 @login_required(login_url="/login")
@@ -13,12 +15,16 @@ def index(request):
     form = ExpenseForm()
     category_form = CategoryForm()
     categories = Category.objects.all()
-    expenses = Expense.objects.all()
+    expenses = Expense.objects.filter(user=request.user).order_by('-id')
+    total_expense = Expense.objects.filter(user=request.user,expense_type='Expense').aggregate(Sum('amount')).get('amount__sum')
+    total_earning = Expense.objects.filter(user=request.user,expense_type='Income').aggregate(Sum('amount')).get('amount__sum')
     context = {
         "form":form,
         "category_form":category_form,
         "categories":categories,
         "expenses":expenses,
+        "total_expense":total_expense,
+        "total_earning":total_earning
     }
     return render(request,"index.html",context)
 
@@ -78,12 +84,16 @@ def handle_register(request):
         
     else:
         return render(request,"account/register.html")
-    
+
+@login_required(login_url="/login")
 def add_expense(request):
     if request.method == "POST":
+        print(request.POST)
         form = ExpenseForm(request.POST)
         if form.is_valid():
-            form.save()
+            expense = form.save(commit=False)
+            expense.user = request.user
+            expense.save()
         
             return redirect("home")
     else:

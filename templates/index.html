@@ -17,6 +17,35 @@
         data-bs-target="#exampleModal">
         Create Category
     </button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#exampleModal1">
+        Add Expense
+    </button>
+    <a href="/logout" class="btn btn-danger">Logout</a>
+
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1"
+    aria-labelledby="exampleModal1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModal1">Create
+                    Category</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="add_expense" method="POST">
+                    {% csrf_token %}
+                    {{ form}}
+                    <div class="d-grid gap-2 my-2">
+                        <button class="btn btn-primary" type="submit">Record Expense</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -44,20 +73,12 @@
     </div>
 </div>
 <div class="container mx-auto">
-    <form action="add_category" method="POST">
-        {% csrf_token %}
-        {{ form}}
-        <div class="d-grid gap-2 my-2">
-            <button class="btn btn-primary" type="submit">Record Expense</button>
-        </div>
-    </form>
+   
     <div class="my-1">
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Filter By Category</option>
-            {% for category in categories %}
-            <option value="{{category.id}}">{{category.name}}</option>
-            {% endfor %}
-        </select>
+       <div class="d-flex justify-content-between">
+           <h1>Total Income: ₹  {{total_earning}}</h1>
+        <h1>Total Expense: ₹  {{total_expense}}</h1>
+       </div>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="home-tab"
@@ -94,9 +115,43 @@
                 {% endfor %}
             </div>
             <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
-                aria-labelledby="profile-tab" tabindex="0">...</div>
+                aria-labelledby="profile-tab" tabindex="0">
+                {% for expense in expenses %}
+
+                {% if expense.expense_type == 'Income' %}
+                <div
+                    class="card {% if expense.expense_type == 'Expense' %}expense{% else %}income{% endif %}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ expense.category }}</h5>
+                        <p class="card-text">{{ expense.notes }}</p>
+                        <p class="card-text">
+                            Amount: ₹ {{ expense.amount }} | Date: {{expense.date}}
+                        </p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+
+            </div>
             <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
-                aria-labelledby="contact-tab" tabindex="0">...</div>
+                aria-labelledby="contact-tab" tabindex="0">
+                {% for expense in expenses %}
+
+                {% if expense.expense_type == 'Expense' %}
+                <div
+                    class="card {% if expense.expense_type == 'Expense' %}expense{% else %}income{% endif %}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ expense.category }}</h5>
+                        <p class="card-text">{{ expense.notes }}</p>
+                        <p class="card-text">
+                            Amount: ₹ {{ expense.amount }} | Date: {{expense.date}}
+                        </p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            
+            </div>
         </div>
 
     </div>
