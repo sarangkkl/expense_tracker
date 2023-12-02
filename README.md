@@ -51,7 +51,10 @@ Provide information on how to use your project. Include any configuration settin
 
 Watch a quick demo of the project:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/utnmFRie7a8?si=fhwmT3g94XIX9PA0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<video width="640" height="360" controls>
+  <source src="demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Contributing
 
