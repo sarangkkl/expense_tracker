@@ -2,7 +2,18 @@
 
 ## Overview
 
-This project is simple expense tracker built on django framework. It is a web application which can be used to track your expenses and income. It also provides a graphical representation of your expenses and inco
+This project is a simple expense tracker built on the Django framework. It is a web application designed to help users track their expenses and income, providing a graphical representation of financial activities.
+
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Demo](#demo)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
 ## Prerequisites
 
@@ -44,17 +55,18 @@ This project is simple expense tracker built on django framework. It is a web ap
 
 ## Usage
 
-Provide information on how to use your project. Include any configuration settings, environment variables, or other details users need to know.
+To use the expense tracker, follow these steps:
 
-## Demo
+1. Create an account.
+2. Log in to your account.
+3. Add your expenses and income.
+4. Explore the graphical representation of your financial activities.
+
 ## Demo
 
 Watch a quick demo of the project:
 
-<video width="640" height="360" controls>
-  <source src="demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[![Project Demo](demo-thumbnail.png)](https://youtu.be/utnmFRie7a8)
 
 ## Contributing
 
@@ -67,8 +79,8 @@ This project is licensed under the [MIT License](LICENSE).
 ## Contact
 
 - Gaurav Sah
-- sahgaurav832@gmail.com
-
+- Email: sahgaurav832@gmail.com
 
 ## Acknowledgements
 
+- Mention any third-party libraries, frameworks, or resources used in your project.
