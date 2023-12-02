@@ -47,8 +47,14 @@ This project is simple expense tracker built on django framework. It is a web ap
 Provide information on how to use your project. Include any configuration settings, environment variables, or other details users need to know.
 
 ## Demo
+## Demo
 
-Watch a quick demo of the project [here](demo.mp4).
+Watch a quick demo of the project:
+
+<video width="640" height="360" controls>
+  <source src="demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Contributing
 
