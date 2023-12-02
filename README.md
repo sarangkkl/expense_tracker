@@ -48,7 +48,7 @@ Provide information on how to use your project. Include any configuration settin
 
 ## Demo
 
-Watch a quick demo of the project [here](demo.mkv).
+Watch a quick demo of the project [here](demo.mp4).
 
 ## Contributing
 
